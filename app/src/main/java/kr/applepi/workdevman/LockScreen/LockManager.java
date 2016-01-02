@@ -350,8 +350,9 @@ public class LockManager implements View.OnTouchListener {
                         AlarmSingleTon.getInstance().setNewAlarm();
                         lockImage.setImageResource(R.drawable.no_worked_lock_image);
                         setExtraTimeTextCurrent();
-                        lockStrText.setText(lockStrWorked);
+                        lockStrText.setText(lockStrNoWorked);
                         isUnlockable = true;
+                        isTimeOver = false;
                     }
                 } else {
                     if (pref.getLong("startDate", 0) > lastPushTime) {

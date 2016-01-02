@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.TimeZone;
 
 /**
  * Created by qkswk on 2015-12-26.
@@ -20,8 +21,16 @@ public class GitRepoData {
     @SerializedName("pushed_at")
     Date pushDate;
 
-    public long getPushDateTime(){
-        return pushDate.getTime();
+    public long getPushDateLocalTime() {
+        long lv_localDateTime = pushDate.getTime();
+
+        TimeZone z = TimeZone.getDefault();
+        int offset = z.getOffset(lv_localDateTime); // The offset includes daylight savings time
+
+        lv_localDateTime = lv_localDateTime + offset;
+
+        return lv_localDateTime;
+
     }
 
     public GitRepoData(String name, String url, String description, Date pushDate) {

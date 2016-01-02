@@ -313,13 +313,13 @@ public class LockManager implements View.OnTouchListener {
                     Call<GitRepoData> call = NetServiceFactory
                             .createAPIService(GitRepoDataService.class)
                             .loadRepoData(username, repoName, accessToken);
-                    return call.execute().body().getPushDateTime();
+                    return call.execute().body().getPushDateLocalTime();
                 } else {
                     Call<List<GitRepoData>> call = NetServiceFactory
                             .createAPIService(GitRepoListService.class)
                             .loadRepoList(accessToken, "pushed");
 
-                    return call.execute().body().get(0).getPushDateTime();
+                    return call.execute().body().get(0).getPushDateLocalTime();
                 }
             } catch (IOException e) {
                 e.printStackTrace();

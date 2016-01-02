@@ -12,7 +12,7 @@ import retrofit.http.Query;
  * Created by qkswk on 2015-12-24.
  */
 public interface GitRepoEventListService {
-    @GET("/repo/{username}/{repo}/events")
+    @GET("/repos/{username}/{repo}/events")
 
     Call<List<GitEventData>> loadEventList(
             @Path("username") String username,

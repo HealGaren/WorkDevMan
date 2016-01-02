@@ -207,6 +207,7 @@ public class MainActivity extends AppCompatActivity {
                 profileCardView.startAnimation(cardAnim);
                 mainLayout.addView(lockSettingCardView, 1);
                 lockSettingCardView.startAnimation(delayedCardAnim);
+                
             }
             mProgressDialog.dismiss();
 

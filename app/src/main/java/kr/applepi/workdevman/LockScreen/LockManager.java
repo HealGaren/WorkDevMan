@@ -33,9 +33,9 @@ import java.util.Calendar;
 import java.util.List;
 
 import kr.applepi.workdevman.Define.CDLockType;
-import kr.applepi.workdevman.HttpService.API.GitEventData;
-import kr.applepi.workdevman.HttpService.API.GitRepoEventListService;
-import kr.applepi.workdevman.HttpService.API.GitUserEventListService;
+import kr.applepi.workdevman.HttpService.API.GitRepoData;
+import kr.applepi.workdevman.HttpService.API.GitRepoDataService;
+import kr.applepi.workdevman.HttpService.API.GitRepoListService;
 import kr.applepi.workdevman.HttpService.NetServiceFactory;
 import kr.applepi.workdevman.R;
 import retrofit.Call;
@@ -294,7 +294,7 @@ public class LockManager implements View.OnTouchListener {
     }
 
 
-    private class NetTask extends AsyncTask<Void, Void, GitEventData> {
+    private class NetTask extends AsyncTask<Void, Void, Long> {
 
 
         @Override
@@ -302,25 +302,22 @@ public class LockManager implements View.OnTouchListener {
         }
 
         @Override
-        protected GitEventData doInBackground(Void... params) {
+        protected Long doInBackground(Void... params) {
             int lockType = pref.getInt("lockType", CDLockType.NO_LOCK);
             String repoName = pref.getString("repoName", "");
-            Call<List<GitEventData>> call;
-
-            if(lockType == CDLockType.USER_LOCK){
-                call = NetServiceFactory
-                        .createAPIService(GitRepoEventListService.class)
-                        .loadEventList(username, repoName, accessToken);
-            }
-            else {
-                 call = NetServiceFactory
-                        .createAPIService(GitUserEventListService.class)
-                        .loadEventList(username, accessToken);
-            }
             try {
-                List<GitEventData> list = call.execute().body();
-                for (GitEventData data : list) {
-                    if (data.isPushEvent()) return data;
+
+                if (lockType == CDLockType.REPO_LOCK) {
+                    Call<GitRepoData> call = NetServiceFactory
+                            .createAPIService(GitRepoDataService.class)
+                            .loadRepoData(username, repoName, accessToken);
+                    return call.execute().body().getPushDateTime();
+                } else {
+                    Call<List<GitRepoData>> call = NetServiceFactory
+                            .createAPIService(GitRepoListService.class)
+                            .loadRepoList(accessToken, "pushed");
+
+                    return call.execute().body().get(0).getPushDateTime();
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -330,10 +327,10 @@ public class LockManager implements View.OnTouchListener {
         }
 
         @Override
-        protected void onPostExecute(GitEventData gitEventData) {
-            if (gitEventData != null) {
+        protected void onPostExecute(Long lastPushTime) {
+            if (lastPushTime != null) {
                 if (isTimeOver) {
-                    if (pref.getLong("startDate", 0) > gitEventData.getCreatedDate().getTime()) {
+                    if (pref.getLong("startDate", 0) > lastPushTime) {
                         lockImage.setImageResource(R.drawable.lock_image);
                         extraTimeText.setText("Time Over!");
                         lockStrText.setText(lockStr);
@@ -346,7 +343,7 @@ public class LockManager implements View.OnTouchListener {
                         isUnlockable = true;
                     }
                 } else {
-                    if (pref.getLong("startDate", 0) > gitEventData.getCreatedDate().getTime()) {
+                    if (pref.getLong("startDate", 0) > lastPushTime) {
                         lockImage.setImageResource(R.drawable.no_worked_lock_image);
                         setExtraTimeTextCurrent();
                         lockStrText.setText(lockStrNoWorked);

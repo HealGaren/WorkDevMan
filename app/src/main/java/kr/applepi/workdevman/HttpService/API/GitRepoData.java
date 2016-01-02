@@ -3,6 +3,7 @@ package kr.applepi.workdevman.HttpService.API;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by qkswk on 2015-12-26.
@@ -15,10 +16,19 @@ public class GitRepoData {
 
     String description;
 
-    public GitRepoData(String name, String url, String description) {
+
+    @SerializedName("pushed_at")
+    Date pushDate;
+
+    public long getPushDateTime(){
+        return pushDate.getTime();
+    }
+
+    public GitRepoData(String name, String url, String description, Date pushDate) {
         this.name = name;
         this.url = url;
         this.description = description;
+        this.pushDate = pushDate;
     }
 
     public String getName() {
@@ -43,5 +53,13 @@ public class GitRepoData {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Date getPushDate() {
+        return pushDate;
+    }
+
+    public void setPushDate(Date pushDate) {
+        this.pushDate = pushDate;
     }
 }

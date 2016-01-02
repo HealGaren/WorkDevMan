@@ -114,6 +114,9 @@ public class LockManager implements View.OnTouchListener {
                 if (isPhoneIdle) new NetTask().execute();
                 else isPhoneIdleFailed = true;
                 break;
+            case Intent.ACTION_SCREEN_OFF:
+                removeView();
+                break;
 
             case ACTION_NETWORK_ON:
                 if (isNetworkFailed) {

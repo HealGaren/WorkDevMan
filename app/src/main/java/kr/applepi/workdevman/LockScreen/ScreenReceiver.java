@@ -19,6 +19,7 @@ public class ScreenReceiver extends BroadcastReceiver {
 
         switch (intent.getAction()) {
             case Intent.ACTION_SCREEN_ON:
+            case Intent.ACTION_SCREEN_OFF:
                 LockManager.getInstance().sendAction(intent.getAction());
                 break;
         }

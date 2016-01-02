@@ -5,8 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.support.v4.media.MediaMetadataCompat;
-import android.widget.Toast;
 
 /**
  * Created by qkswk on 2015-12-31.

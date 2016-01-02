@@ -76,6 +76,7 @@ public class LockManager implements View.OnTouchListener {
 
     private TextView extraTimeText;
     private TextView lockStrText;
+    private TextView pushedTimeText;
 
     private AdView adView;
     private AdRequest.Builder builder;
@@ -168,6 +169,7 @@ public class LockManager implements View.OnTouchListener {
         lockImage = (ImageView) view.findViewById(R.id.image_lock);
         extraTimeText = (TextView) view.findViewById(R.id.text_extra_time);
         lockStrText = (TextView) view.findViewById(R.id.text_lock_str);
+        pushedTimeText = (TextView) view.findViewById(R.id.text_pushed_time);
 
         adView = (AdView) view.findViewById(R.id.adView);
         builder = new AdRequest.Builder();
@@ -329,6 +331,15 @@ public class LockManager implements View.OnTouchListener {
         @Override
         protected void onPostExecute(Long lastPushTime) {
             if (lastPushTime != null) {
+                Calendar cal = Calendar.getInstance();
+                cal.setTimeInMillis(lastPushTime);
+
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+                int hour = cal.get(Calendar.HOUR_OF_DAY);
+                int minute = cal.get(Calendar.MINUTE);
+                pushedTimeText.setText(year + "." + (month+1) + "." + day + " " + hour + ":" + minute);
                 if (isTimeOver) {
                     if (pref.getLong("startDate", 0) > lastPushTime) {
                         lockImage.setImageResource(R.drawable.lock_image);

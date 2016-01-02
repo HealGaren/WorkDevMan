@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import kr.applepi.workdevman.Activity.LoginActivity.LoginActivity;
 import kr.applepi.workdevman.R;
+import kr.applepi.workdevman.ServiceTool;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -18,6 +19,8 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         pref = getSharedPreferences("data", MODE_PRIVATE);
+
+        ServiceTool.reloadService(this);
 
         new Handler().postDelayed(new Runnable() {
             @Override

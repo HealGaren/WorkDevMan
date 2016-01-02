@@ -105,7 +105,7 @@ public class SelectRepoActivity extends AppCompatActivity {
         @Override
         protected List<GitRepoData> doInBackground(Void... params) {
 
-            Call<List<GitRepoData>> call = NetServiceFactory.createAPIService(GitRepoListService.class).loadRepoList(accessToken);
+            Call<List<GitRepoData>> call = NetServiceFactory.createAPIService(GitRepoListService.class).loadRepoList(accessToken, "pushed");
             try {
                 return call.execute().body();
             } catch (IOException e) {

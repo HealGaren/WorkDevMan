@@ -14,6 +14,7 @@ import retrofit.http.Query;
 public interface GitRepoListService {
     @GET("/user/repos")
     Call<List<GitRepoData>> loadRepoList(
-            @Query("access_token") String accessToken
+            @Query("access_token") String accessToken,
+            @Query("sort") String sort
     );
 }

@@ -9,7 +9,7 @@
     android:padding="10dp"
 
     android:weightSum="10"
-    tools:context="kr.applepi.workdevman.Activity.DialogActivity.LogoutActivity">
+    tools:context="kr.spyec.workdevman.Activity.DialogActivity.LogoutActivity">
 
     <TextView
         android:layout_width="wrap_content"

@@ -10,7 +10,7 @@
     android:paddingRight="10dp"
     android:paddingTop="10dp"
     android:paddingBottom="10dp"
-    tools:context="kr.applepi.workdevman.Activity.DialogActivity.TimePickerActivity">
+    tools:context="kr.spyec.workdevman.Activity.DialogActivity.TimePickerActivity">
 
     <TimePicker
         android:id="@+id/time_picker"

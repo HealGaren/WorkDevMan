@@ -1,4 +1,4 @@
-package kr.applepi.workdevman;
+package kr.spyec.workdevman;
 
 import org.junit.Test;
 

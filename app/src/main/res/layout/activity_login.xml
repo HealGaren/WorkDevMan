@@ -9,7 +9,7 @@
     android:padding="20dp"
     android:weightSum="10"
     android:background="@color/colorPrimary"
-    tools:context="kr.applepi.workdevman.Activity.LoginActivity.LoginActivity">
+    tools:context="kr.spyec.workdevman.Activity.LoginActivity.LoginActivity">
 
     <TextView
         android:layout_width="wrap_content"

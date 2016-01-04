@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
     android:fitsSystemWindows="true"
     tools:context=".MainActivity">
 
@@ -28,7 +27,6 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                android:background="@color/colorPrimary"
                 app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
                 app:layout_collapseMode="parallax"
                 app:layout_collapseParallaxMultiplier="0.5">
@@ -43,7 +41,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:text="개발자가\n놀고 있을지도\n모릅니다!"
+                    android:text="부지런한\n개발자가\n되어보세요!"
                     android:textColor="#fff"
                     android:textSize="40sp" />
             </RelativeLayout>
@@ -69,5 +67,7 @@
         <include layout="@layout/content_main" />
 
     </android.support.v4.widget.NestedScrollView>
+
+
 
 </android.support.design.widget.CoordinatorLayout>
